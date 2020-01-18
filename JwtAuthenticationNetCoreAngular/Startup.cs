@@ -1,7 +1,10 @@
+using JwtAuthenticationNetCoreAngular.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +28,21 @@ namespace JwtAuthenticationNetCoreAngular
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddDbContext<AuthenticationContext>(options =>
+            options.UseSqlite("Data Source=user"));
+
+            services.AddIdentityCore<ApplicationUser>()
+                .AddEntityFrameworkStores<AuthenticationContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
             });
         }
 
@@ -51,6 +69,8 @@ namespace JwtAuthenticationNetCoreAngular
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

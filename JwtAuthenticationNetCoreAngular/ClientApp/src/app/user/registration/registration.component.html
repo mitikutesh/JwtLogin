@@ -1,0 +1,49 @@
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="row" style="height: 250px;">
+      <div class="col-md-12 my-auto site-heder">
+        <h1>User Registration</h1>
+        <p><em>Using Apsnet core 3.1 and angular</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <form [formGroup]="service.formModel" autocomplete="off" action="">
+      <div class="form-group required">
+        <label>UserName</label>
+        <input class="from-conrol" fromControllName="UserName">
+        <!-- <label for="" class="text-danger" ngIf ="service.formModel.get('UserName').touched &&
+        service.formModel.get('UserName').errors?.required">This field is mandatory</label> -->
+      </div>
+
+      <div class="form-group required">
+        <label>Email</label>
+        <input class="from-conrol" fromControllName="Email">
+        <!-- <label for="" class="text-danger" ngIf ="service.formModel.get('Email').touched &&
+        service.formModel.get('Email').errors?.Email">Invalide Email Address</label> -->
+      </div>
+
+      <div class="form-group required">
+        <label>FullName</label>
+        <input class="from-conrol" fromControllName="FullName">
+      </div>
+
+      <div formGroupName="Passwords required">
+        <div class="form-group">
+          <label>Password</label>
+          <input class="from-conrol" fromControllName="Password">
+        </div>
+
+        <div class="form-group required">
+          <label>ConfirmPassword</label>
+          <input class="from-conrol" fromControllName="ConfirmPassword">
+        </div>
+      </div>
+      <div class="form-row required">
+          <div class="form-group col-md-8 offset-md-2">
+            <button type="submit" class="btn btn-lg btn-block">Sign up</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
